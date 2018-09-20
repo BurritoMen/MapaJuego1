@@ -8,8 +8,14 @@ public class KeySetter : MonoBehaviour {
     private string Key;
     [SerializeField]
     private bool WaitingForKey;
-
+    private static bool Busy;
     Event KeyEvent;
+
+    //para testear nomas
+    public bool waiting()
+    {
+        return WaitingForKey;
+    }
 
     private void OnGUI()
     {
@@ -19,6 +25,7 @@ public class KeySetter : MonoBehaviour {
             KeyCode newKey = KeyEvent.keyCode;
             SetKey(newKey);
             WaitingForKey = false;
+            Busy = false;
         }
     }
     
@@ -29,6 +36,11 @@ public class KeySetter : MonoBehaviour {
     
     public void ButtonPress()
     {
-        WaitingForKey = true;
+        if (!Busy)
+        {
+            WaitingForKey = true;
+            Busy = true;
+        }
+        
     }
 }

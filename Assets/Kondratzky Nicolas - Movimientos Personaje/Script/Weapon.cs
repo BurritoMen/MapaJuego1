@@ -12,6 +12,12 @@ public class Weapon : MonoBehaviour
     public Transform firePointBomb;
     public GameObject bombPrefab;
 
+    [SerializeField]
+    private string shoot;
+    [SerializeField]
+    private string grenade;
+
+
     void Update ()
     {
         FireGun();
@@ -21,7 +27,7 @@ public class Weapon : MonoBehaviour
 
     void FireGun()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(InputController.instance.Keys[shoot]))
         {
             GameObject clone = Instantiate(bulletPrefab, firePointGun.position, firePointGun.rotation);
             Destroy(clone, 3f);
@@ -30,7 +36,7 @@ public class Weapon : MonoBehaviour
 
     void FireBomb()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetKeyDown(InputController.instance.Keys[grenade]))
         {
             GameObject clone = Instantiate(bombPrefab, firePointBomb.position, firePointBomb.rotation);
             Destroy(clone, 3f);

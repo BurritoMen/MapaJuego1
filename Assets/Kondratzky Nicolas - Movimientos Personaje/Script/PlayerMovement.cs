@@ -18,14 +18,37 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
+
+    [SerializeField]
+    private string shoot;
+    [SerializeField]
+    private string grenade;
+    [SerializeField]
+    private string jumpB;
+    [SerializeField]
+    private string up;
+    [SerializeField]
+    private string down;
+    [SerializeField]
+    private string left;
+    [SerializeField]
+    private string right;
+
+    private float HorizontalAxis;
+
     void Start()
     {
         GetComponent();
     }
 
-    void Update ()
+    void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        if (Input.GetKey(InputController.instance.Keys[left]))
+            HorizontalAxis = -1;
+        else if (Input.GetKey(InputController.instance.Keys[right]))
+            HorizontalAxis = 1;
+        else HorizontalAxis = 0;
+        horizontalMove = HorizontalAxis * runSpeed;
 
         animatorPlayer.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
@@ -51,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(InputController.instance.Keys[jumpB]))
         {
             jump = true;
             animatorPlayer.SetBool("IsJumping", true);
@@ -60,11 +83,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Crouch()
     {
-        if (Input.GetButtonDown("Crouch"))
+        if (Input.GetKeyDown(InputController.instance.Keys[down]))
         {
             crouch = true;
         }
-        else if (Input.GetButtonUp("Crouch"))
+        else if (Input.GetKeyUp(InputController.instance.Keys[down]))
         {
             crouch = false;
         }
@@ -72,20 +95,21 @@ public class PlayerMovement : MonoBehaviour
 
     void AnimatorWapon()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(InputController.instance.Keys[shoot]))
         {
             weaponCenterAnimator.SetBool("WeaponUp", true);
         }
-        else if (Input.GetKeyUp(KeyCode.W))
+        else if (Input.GetKeyUp(InputController.instance.Keys[shoot]))
         {
             weaponCenterAnimator.SetBool("WeaponUp", false);
         }
 
-        if (controller.m_Grounded == false && Input.GetKey(KeyCode.S))
+        if (controller.m_Grounded == false && (Input.GetKeyDown(InputController.instance.Keys[shoot])))
         {
             weaponCenterAnimator.SetBool("WeaponJumpDown", true);
         }
-        else if (controller.m_Grounded == true && Input.GetKey(KeyCode.S) || Input.GetKeyUp(KeyCode.S))
+        else if (controller.m_Grounded == true && (Input.GetKey(InputController.instance.Keys[shoot]))
+            || (Input.GetKeyUp(InputController.instance.Keys[shoot])))
         {
             weaponCenterAnimator.SetBool("WeaponJumpDown", false);
         }

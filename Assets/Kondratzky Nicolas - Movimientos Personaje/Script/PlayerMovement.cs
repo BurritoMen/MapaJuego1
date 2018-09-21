@@ -95,20 +95,20 @@ public class PlayerMovement : MonoBehaviour
 
     void AnimatorWapon()
     {
-        if (Input.GetKeyDown(InputController.instance.Keys[shoot]))
+        if (Input.GetKeyDown(InputController.instance.Keys[up]))
         {
             weaponCenterAnimator.SetBool("WeaponUp", true);
         }
-        else if (Input.GetKeyUp(InputController.instance.Keys[shoot]))
+        else if (Input.GetKeyUp(InputController.instance.Keys[up]))
         {
             weaponCenterAnimator.SetBool("WeaponUp", false);
         }
 
-        if (controller.m_Grounded == false && (Input.GetKeyDown(InputController.instance.Keys[shoot])))
+        if (controller.m_Grounded == false && (Input.GetKeyDown(InputController.instance.Keys[down])))
         {
             weaponCenterAnimator.SetBool("WeaponJumpDown", true);
         }
-        else if (controller.m_Grounded == true && (Input.GetKey(InputController.instance.Keys[shoot]))
+        else if (controller.m_Grounded == true && (Input.GetKey(InputController.instance.Keys[down]))
             || (Input.GetKeyUp(InputController.instance.Keys[shoot])))
         {
             weaponCenterAnimator.SetBool("WeaponJumpDown", false);

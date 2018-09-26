@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
-
     [SerializeField]
     private string shoot;
     [SerializeField]
@@ -123,5 +122,21 @@ public class PlayerMovement : MonoBehaviour
     public void OnCrouching(bool isCrouching)
     {
         animatorPlayer.SetBool("IsCrouching", isCrouching);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        //Death Animation
+        Destroy(gameObject);
     }
 }

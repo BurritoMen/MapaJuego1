@@ -357,6 +357,13 @@ MonoBehaviour:
   health: 100
   runSpeed: 60
   weaponCenterAnimator: {fileID: 95398521705509496}
+  shoot: 
+  grenade: 
+  jumpB: 
+  up: 
+  down: 
+  left: 
+  right: 
 --- !u!114 &114874141954718054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,6 +380,8 @@ MonoBehaviour:
     type: 2}
   firePointBomb: {fileID: 4382692279499202}
   bombPrefab: {fileID: 1602502685589800, guid: 73e0856b9bbfb734091dce466e815ade, type: 2}
+  shoot: 
+  grenade: 
 --- !u!212 &212298912645076974
 SpriteRenderer:
   m_ObjectHideFlags: 1

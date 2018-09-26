@@ -31,7 +31,7 @@ public class Bomb : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<Enemy>();
+        EnemyStatic enemy = collision.GetComponent<EnemyStatic>();
         if (enemy != null)
         {
             enemy.TakeDamage(damege);

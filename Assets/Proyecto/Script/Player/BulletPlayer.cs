@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BulletPlayer : MonoBehaviour
 {
     [Header("Attributes Bullet")]
     public float speed = 20f;
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<Enemy>();
+        EnemyStatic enemy = collision.GetComponent<EnemyStatic>();
         if(enemy != null)
         {
             enemy.TakeDamage(damege);

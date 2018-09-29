@@ -86,7 +86,7 @@ public class CharacterController2D : MonoBehaviour
 					OnCrouchEvent.Invoke(true);
 				}
 
-				// Reduce the speed by the crouchSpeed multiplier
+				// Reduce the speedMovement by the crouchSpeed multiplier
 				move *= m_CrouchSpeed;
 
 				// Disable one of the colliders when crouching

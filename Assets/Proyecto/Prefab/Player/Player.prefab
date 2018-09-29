@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 114116963393701290}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,7 @@ GameObject:
   m_Layer: 8
   m_Name: FirePointGun
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -60,7 +60,7 @@ GameObject:
   m_Layer: 8
   m_Name: CeilingCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -75,7 +75,7 @@ GameObject:
   m_Layer: 8
   m_Name: GroundChecK
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -106,7 +106,7 @@ GameObject:
   m_Layer: 8
   m_Name: 'FirePointBomb '
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1999107007172290}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.2999992, y: -0.3399999, z: 0}
+  m_LocalPosition: {x: 2.69, y: -0.3399999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4411352798632098}
@@ -357,13 +357,13 @@ MonoBehaviour:
   health: 100
   runSpeed: 60
   weaponCenterAnimator: {fileID: 95398521705509496}
-  shoot: 
-  grenade: 
-  jumpB: 
-  up: 
-  down: 
-  left: 
-  right: 
+  shoot: a
+  grenade: b
+  jumpB: c
+  up: up
+  down: down
+  left: left
+  right: right
 --- !u!114 &114874141954718054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -380,8 +380,8 @@ MonoBehaviour:
     type: 2}
   firePointBomb: {fileID: 4382692279499202}
   bombPrefab: {fileID: 1602502685589800, guid: 73e0856b9bbfb734091dce466e815ade, type: 2}
-  shoot: 
-  grenade: 
+  shoot: a
+  grenade: b
 --- !u!212 &212298912645076974
 SpriteRenderer:
   m_ObjectHideFlags: 1

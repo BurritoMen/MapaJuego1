@@ -100,10 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damege: 100
-  speedX: 8
-  speedY: 8
-  speedInitialY: 8
-  acceleration: 2
+  speedX: 12
+  speedY: 12
+  speedInitialY: 12
+  acceleration: 6
   gravity: 8.1
   bombImpactEffect: {fileID: 1619346884444772, guid: 22a876eacf63eaf468e854f65fbb0442,
     type: 2}

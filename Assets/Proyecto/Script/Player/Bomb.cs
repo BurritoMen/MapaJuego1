@@ -31,16 +31,25 @@ public class Bomb : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy != null)
+        if (collision.tag != "Player")
         {
-            enemy.TakeDamage(damege);
+            Enemy enemy = collision.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damege);
+            }
+
+            EnemyHelicopter enemyHelicopter = collision.GetComponent<EnemyHelicopter>();
+            if (enemyHelicopter != null)
+            {
+                enemyHelicopter.TakeDamage(damege);
+            }
+
+            GameObject clone = Instantiate(bombImpactEffect, transform.position, transform.rotation);
+
+            Destroy(clone, 3f);
+
+            Destroy(gameObject);
         }
-
-        GameObject clone = Instantiate(bombImpactEffect, transform.position, transform.rotation);
-
-        Destroy(clone, 3f);
-
-        Destroy(gameObject);
     }
 }

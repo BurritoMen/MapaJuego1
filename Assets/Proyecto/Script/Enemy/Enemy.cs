@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public enum TypeEnemies { Static, WithMovement }
+    public enum TypeEnemies { Static, WithMovement, Scared }
 
     [Header("Type Enemies")]
     public TypeEnemies typeEnemies;
@@ -55,6 +55,11 @@ public class Enemy : MonoBehaviour
         if (typeEnemies == TypeEnemies.WithMovement)
         {
             WithMovement();
+        }
+
+        if (typeEnemies == TypeEnemies.Scared)
+        {
+            Scared();
         }
     }
 
@@ -142,6 +147,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void Escape()
+    {
+        if(player.position.x > transform.position.x)
+        {
+            transform.Translate(Vector2.left * speedMovement * Time.deltaTime);
+        }
+
+        if (player.position.x < transform.position.x)
+        {
+            transform.Translate(Vector2.right * speedMovement * Time.deltaTime);
+        }
+    }
+
     #region "TypeEnemies"
     void Static()
     {
@@ -163,6 +181,15 @@ public class Enemy : MonoBehaviour
         {
             VerifyPlayerPosition();
             Shooting();
+        }
+    }
+
+    void Scared()
+    {
+        if (seePlayer == true)
+        {
+            VerifyPlayerPosition();
+            Escape();
         }
     }
     #endregion

@@ -36,6 +36,12 @@ public class BulletPlayer : MonoBehaviour
             enemy.TakeDamage(damege);
         }
 
+        EnemyHelicopter enemyHelicopter = collision.GetComponent<EnemyHelicopter>();
+        if (enemyHelicopter != null)
+        {
+            enemyHelicopter.TakeDamage(damege);
+        }
+
         GameObject clone = Instantiate(bulletImpactEffect, transform.position, transform.rotation);
 
         Destroy(clone, 3f);

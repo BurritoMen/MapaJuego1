@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletEnemy : MonoBehaviour
 {
     [Header("Attributes Bullet")]
+    public bool hasMovement;
     public float speed = 20f;
     public int damege = 40;
 
@@ -23,7 +24,10 @@ public class BulletEnemy : MonoBehaviour
 	
 	void Update ()
     {
-        rb2D.velocity = transform.right * speed;
+        if(hasMovement == true)
+        {
+            rb2D.velocity = transform.right * speed;
+        }
     }
 
     void GetComponent()
@@ -35,16 +39,19 @@ public class BulletEnemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerMovement player = collision.GetComponent<PlayerMovement>();
-        if (player != null)
+        if(collision.tag != "Enemy")
         {
-            player.TakeDamage(damege);
+            PlayerMovement player = collision.GetComponent<PlayerMovement>();
+            if (player != null)
+            {
+                player.TakeDamage(damege);
+            }
+
+            GameObject clone = Instantiate(bulletImpactEffect, transform.position, transform.rotation);
+
+            Destroy(clone, 3f);
+
+            Destroy(gameObject);
         }
-
-        GameObject clone = Instantiate(bulletImpactEffect, transform.position, transform.rotation);
-
-        Destroy(clone, 3f);
-
-        Destroy(gameObject);
     }
 }

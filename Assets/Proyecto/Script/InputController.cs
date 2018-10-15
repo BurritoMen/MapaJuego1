@@ -39,5 +39,13 @@ public class InputController : MonoBehaviour {
         }
         Keys[KeyName] = KeyToBind;
     }
+    public void RestoreDefaults()
+    {
+        for (int C = 0; C < KeyCodes.Length; C++)
+        {
+            Keys[KeyNames[C]] = KeyCodes[C];
+          
+        }
+    }
 
 }

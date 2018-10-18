@@ -18,20 +18,14 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
-    [SerializeField]
-    private string shoot;
-    [SerializeField]
-    private string grenade;
-    [SerializeField]
-    private string jumpB;
-    [SerializeField]
-    private string up;
-    [SerializeField]
-    private string down;
-    [SerializeField]
-    private string left;
-    [SerializeField]
-    private string right;
+    [Header("Input Player")]
+    public string shoot;
+    public string grenade;
+    public string jumpB;
+    public string up;
+    public string down;
+    public string left;
+    public string right;
 
     private float HorizontalAxis;
 

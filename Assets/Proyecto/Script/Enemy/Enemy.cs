@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GetComponent();
 
         timeBtwShots = everyHowMuchShoots;
 
@@ -61,6 +61,11 @@ public class Enemy : MonoBehaviour
         {
             Scared();
         }
+    }
+
+    void GetComponent()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public void Shooting()

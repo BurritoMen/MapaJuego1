@@ -26,13 +26,18 @@ public class EnemyHelicopter : MonoBehaviour
 
     void Start ()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        GetComponent();
     }
 
 	void Update ()
     {
         FollowPlayer();
         CycleShooting();
+    }
+
+    void GetComponent()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void FollowPlayer()

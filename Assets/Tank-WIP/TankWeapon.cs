@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class TankWeapon : MonoBehaviour
 {
+    [Header("Input")]
+    public Weapon WeaponPlayer;
+
     [Header("Gun")]
     public Transform firePointGun;
     public GameObject bulletPrefab;
@@ -12,15 +15,24 @@ public class Weapon : MonoBehaviour
     public Transform firePointBomb;
     public GameObject bombPrefab;
 
-    public string shoot;
-    public string grenade;
+    //get component
+    Tank tank;
+    private string shoot;
+    private string grenade;
 
-
-    void Update ()
+    void Start()
     {
-        FireGun();
+        GetComponent();
+    }
 
-        FireBomb();
+    void Update()
+    {
+        if(tank.Occupied == true)
+        {
+            FireGun();
+
+            FireBomb();
+        }
     }
 
     void FireGun()
@@ -39,5 +51,13 @@ public class Weapon : MonoBehaviour
             GameObject clone = Instantiate(bombPrefab, firePointBomb.position, firePointBomb.rotation);
             Destroy(clone, 3f);
         }
+    }
+
+    void GetComponent()
+    {
+        tank = GetComponent<Tank>();
+
+        shoot = WeaponPlayer.shoot;
+        grenade = WeaponPlayer.grenade;
     }
 }

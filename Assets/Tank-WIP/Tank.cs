@@ -122,7 +122,7 @@ public class Tank : MonoBehaviour
         down = inputPlayer.down;
         left = inputPlayer.left;
         right = inputPlayer.right;
-}
+    }
 
     void ActivateTankEntry()
     {

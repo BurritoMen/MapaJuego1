@@ -142,9 +142,12 @@ public class Enemy : MonoBehaviour
         RaycastHit2D eyesInfo = Physics2D.Raycast(eyes.position, directionView, distanceRaycastEyes);
         Debug.DrawRay(eyes.position, directionView * distanceRaycastEyes, Color.red);
 
-        if (eyesInfo.collider != null && eyesInfo.collider.tag == "Player")
+        if (eyesInfo.collider != null)
         {
-            seePlayer = true;
+            if (eyesInfo.collider.tag == "Player" || eyesInfo.collider.tag == "Tank")
+            {
+                seePlayer = true;
+            }
         }
         else
         {

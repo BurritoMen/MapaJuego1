@@ -6,22 +6,17 @@ public class TankPlayerDetection : MonoBehaviour
 {
     public Tank tank;
 
-	void Start ()
-    {
-		
-	}
-
-	void Update ()
-    {
-		
-	}
-
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (tank.coolDown == false)
         {
-            tank.Occupied = true;
-            Debug.Log("Activar EVA 01");
+            if (collision.tag == "Player" && tank.Occupied == false)
+            {
+                collision.gameObject.transform.position = this.gameObject.transform.position;
+                collision.gameObject.transform.parent = this.gameObject.transform.parent;
+                collision.gameObject.SetActive(false);
+                tank.Occupied = true;
+            }
         }
     }
 }

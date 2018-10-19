@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
         Crouch();
 
         AnimatorWapon();
+
+        CheckCharacterAddressRegardingSprite();
     }
 
     void FixedUpdate()
@@ -132,5 +134,18 @@ public class PlayerMovement : MonoBehaviour
     {
         //Death Animation
         Destroy(gameObject);
+    }
+
+    void CheckCharacterAddressRegardingSprite()
+    {
+        if (HorizontalAxis > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        if (HorizontalAxis < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 }

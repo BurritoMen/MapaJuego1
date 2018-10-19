@@ -6,8 +6,11 @@ public class Tank : MonoBehaviour
 {
     [Header("Attributes Tank")]
     public bool Occupied;
+    public bool coolDown;
+    public int coolDownTime;
     public int health = 100;
     public float runSpeed = 40f;
+    bool grounded;
 
     [Header("Collider 2D")]
     public BoxCollider2D tankCollider1;
@@ -18,7 +21,7 @@ public class Tank : MonoBehaviour
     //Get Component
     Rigidbody2D rb2D;
     CharacterController2D controller;
-    Transform player;
+    GameObject player;
 
     //input
     PlayerMovement inputPlayer;
@@ -41,6 +44,8 @@ public class Tank : MonoBehaviour
         GetComponent();
 
         Occupied = false;
+
+        coolDown = false;
     }
 	
 	void Update ()
@@ -51,15 +56,13 @@ public class Tank : MonoBehaviour
             tankCollider2.isTrigger = true;
             entryCollider.enabled = false;
 
-            rb2D.bodyType = RigidbodyType2D.Kinematic;
+            rb2D.bodyType = RigidbodyType2D.Static;
 
             ActivateTankEntry();
         }
 
         if (Occupied)
         {
-            player.gameObject.SetActive(false);
-
             tankCollider1.isTrigger = false;
             tankCollider2.isTrigger = false;
 
@@ -72,9 +75,28 @@ public class Tank : MonoBehaviour
             else HorizontalAxis = 0;
             horizontalMove = HorizontalAxis * runSpeed;
 
+
+            if (grounded == false)
+            {
+                if (Input.GetKey(InputController.instance.Keys[down]) && Input.GetKey(InputController.instance.Keys[jumpB]))
+                {
+                    EjectPlayer();
+                }
+            }
+
             Jump();
 
             Crouch();
+        }
+
+        if (!controller.m_Grounded)
+        {
+            grounded = true;
+        }
+
+        if (health <= 0)
+        {
+            Die();
         }
     }
 
@@ -104,13 +126,22 @@ public class Tank : MonoBehaviour
         }
     }
 
+    public void OnLanding()
+    {
+        grounded = false;
+    }
+
+    public void OnCrouching(bool isCrouching)
+    {
+    }
+
     void GetComponent()
     {
         rb2D = GetComponent<Rigidbody2D>();
 
         controller = GetComponent<CharacterController2D>();
 
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
 
         inputPlayer = player.GetComponent<PlayerMovement>();
 
@@ -126,14 +157,51 @@ public class Tank : MonoBehaviour
 
     void ActivateTankEntry()
     {
-        if (player.position.y >= entryCollider.transform.position.y + distanceToActivateEntry)
+        if (player.transform.position.y >= entryCollider.transform.position.y + distanceToActivateEntry)
         {
             entryCollider.enabled = true;
         }
 
-        if (player.position.y < entryCollider.transform.position.y)
+        if (player.transform.position.y < entryCollider.transform.position.y)
         {
             entryCollider.enabled = false;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        EjectPlayer();
+        Destroy(gameObject);
+    }
+
+    void EjectPlayer()
+    {
+        coolDown = true;
+        Occupied = false;
+        player.SetActive(true);
+        player.transform.parent = null;
+
+        player.transform.rotation = Quaternion.Euler(0,0,0);
+
+        StartCoroutine(CoolDown());
+    }
+
+    IEnumerator CoolDown()
+    {
+        yield return new WaitForSeconds(coolDownTime);
+
+        coolDown = false;
+
+        StopAllCoroutines();
     }
 }

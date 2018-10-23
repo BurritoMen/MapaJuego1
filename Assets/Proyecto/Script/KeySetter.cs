@@ -75,7 +75,10 @@ public class KeySetter : MonoBehaviour {
     {
         InputController.instance.ChangeKeyCode(Key, NewKey);
     }
-    
+    private void JoystickSwitch()
+    {
+        InputController.instance.Joystick = !InputController.instance.Joystick;
+    }
     public void ButtonPress()
     {
         if (!Busy)

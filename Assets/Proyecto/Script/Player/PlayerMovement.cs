@@ -36,11 +36,24 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(InputController.instance.Keys[left]))
-            HorizontalAxis = -1;
-        else if (Input.GetKey(InputController.instance.Keys[right]))
-            HorizontalAxis = 1;
-        else HorizontalAxis = 0;
+        if (InputController.instance.Joystick)
+        {
+            if (Input.GetAxis("Horizontal") < 0)
+                HorizontalAxis = -1;
+            else if (Input.GetAxis("Horizontal") > 0)
+                HorizontalAxis = 1;
+            else
+                HorizontalAxis = 0;
+        }
+        else
+        {
+            if (Input.GetKey(InputController.instance.Keys[left]))
+                HorizontalAxis = -1;
+            else if (Input.GetKey(InputController.instance.Keys[right]))
+                HorizontalAxis = 1;
+            else HorizontalAxis = 0;
+        }
+       
         horizontalMove = HorizontalAxis * runSpeed;
 
         animatorPlayer.SetFloat("Speed", Mathf.Abs(horizontalMove));
@@ -78,32 +91,57 @@ public class PlayerMovement : MonoBehaviour
 
     void Crouch()
     {
-        if (Input.GetKeyDown(InputController.instance.Keys[down]))
+        if (InputController.instance.Joystick)
         {
-            crouch = true;
+            if (Input.GetAxis("Vertical") < 0)
+                crouch = true;
+            else if (Input.GetAxis("Vertical") >= 0)
+                crouch = false;
         }
-        else if (Input.GetKeyUp(InputController.instance.Keys[down]))
+        else
         {
-            crouch = false;
+            if (Input.GetKeyDown(InputController.instance.Keys[down]))
+            {
+                crouch = true;
+            }
+            else if (Input.GetKeyUp(InputController.instance.Keys[down]))
+            {
+                crouch = false;
+            }
         }
+       
     }
 
     void AnimatorWapon()
     {
-        if (Input.GetKeyDown(InputController.instance.Keys[up]))
+        if (InputController.instance.Joystick)
         {
-            weaponCenterAnimator.SetBool("WeaponUp", true);
+            if (Input.GetAxis("Vertical") > 0)
+                weaponCenterAnimator.SetBool("WeaponUp", true);
+            else if (Input.GetAxis("Vertical") <= 0)
+                weaponCenterAnimator.SetBool("WeaponUp", false);
         }
-        else if (Input.GetKeyUp(InputController.instance.Keys[up]))
+        else
         {
-            weaponCenterAnimator.SetBool("WeaponUp", false);
+            if (Input.GetKeyDown(InputController.instance.Keys[up]))
+            {
+                weaponCenterAnimator.SetBool("WeaponUp", true);
+            }
+            else if (Input.GetKeyUp(InputController.instance.Keys[up]))
+            {
+                weaponCenterAnimator.SetBool("WeaponUp", false);
+            }
         }
+       
 
-        if (controller.m_Grounded == false && (Input.GetKeyDown(InputController.instance.Keys[down])))
+        if (controller.m_Grounded == false &&((InputController.instance.Joystick&&
+            Input.GetAxis("Vertical") > 0)
+            || (Input.GetKeyDown(InputController.instance.Keys[down]))))
         {
             weaponCenterAnimator.SetBool("WeaponJumpDown", true);
         }
-        else if (controller.m_Grounded == true && (Input.GetKey(InputController.instance.Keys[down]))
+        else if (controller.m_Grounded == true &&((InputController.instance.Joystick &&
+            Input.GetAxis("Vertical") <= 0) || (Input.GetKey(InputController.instance.Keys[down])))
             || (Input.GetKeyUp(InputController.instance.Keys[shoot])))
         {
             weaponCenterAnimator.SetBool("WeaponJumpDown", false);

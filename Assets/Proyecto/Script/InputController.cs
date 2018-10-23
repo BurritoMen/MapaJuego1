@@ -11,9 +11,14 @@ public class InputController : MonoBehaviour {
     [SerializeField]
     private string[] KeyNames;
     public Dictionary<string,KeyCode> Keys { get; set; }
+    public bool Joystick { get; set; }
 
     private void Awake()
     {
+        //para testear joysticks
+        Joystick = true;
+
+
        // Debug.Log("entro1");
         if (instance == null)
             instance = this;

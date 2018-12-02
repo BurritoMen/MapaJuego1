@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     public Transform groundDetection;
 
     [Header("Eyes")]
-    bool seePlayer;
+    public bool seePlayer;
     public float distanceRaycastEyes;
     public Transform eyes;
     Vector2 directionView;
